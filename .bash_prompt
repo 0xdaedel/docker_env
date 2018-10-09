@@ -11,6 +11,7 @@ bash_prompt() {
 
     local GREEN="\[\033[1;32m\]"
     local BLUE="\[\033[1;34m\]"
+    local LIGHTBLUE="\[\033[38;5;33m\]"
     local MAGENTA="\[\033[1;35m\]"
     local NONE="\[\033[0m\]"    # unsets color to term's fg color
 
@@ -20,7 +21,7 @@ bash_prompt() {
 
     [ $RET -ne 0 ] && RET_STR="${BOLDRED}($RET) "    
 
-    PS1="${RED}\u@${BLUE}\h:\w ${RET_STR}${NONE}"
+    PS1="${RED}\u@${LIGHTBLUE}\h:\w ${RET_STR}${NONE}"
 
 
 }
