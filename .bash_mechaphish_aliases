@@ -1,0 +1,5 @@
+alias trace='/home/angr/.virtualenvs/angr-pypy/site-packages/shellphish_qemu/bin/shellphish-qemu-cgc-tracer'
+alias emu='/home/angr/.virtualenvs/angr-pypy/bin/afl-cgc/qemu_mode/qemu-cgc-afl/i386-linux-user/qemu-i386'
+alias cg++='/home/angr/angr-dev/compilerex/compile.sh +'
+alias cgcc='/home/angr/angr-dev/compilerex/compile.sh'
+
