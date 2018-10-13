@@ -10,19 +10,24 @@ bash_prompt() {
     local BOLDRED="\[\033[1;31m\]"
 
     local GREEN="\[\033[1;32m\]"
+    local BLUEGREEN="\[\033[38;5;81m\]"
+
     local BLUE="\[\033[1;34m\]"
     local LIGHTBLUE="\[\033[38;5;33m\]"
     local MAGENTA="\[\033[1;35m\]"
+
     local NONE="\[\033[0m\]"    # unsets color to term's fg color
 
-    
+    local VENV=""
+    if [ ! -z ${VIRTUAL_ENV+x} ];
+        then local VENV=" ${BLUEGREEN}[$(basename $VIRTUAL_ENV)]${NONE} ";
+    fi
 #    local TOPDIRS="$(basename $(dirname $PWD))/$(basename $PWD) "
     local RET_STR="${GREEN}# "
 
-    [ $RET -ne 0 ] && RET_STR="${BOLDRED}($RET) "    
+    [ $RET -ne 0 ] && RET_STR="${BOLDRED}($RET) "
 
-    PS1="${RED}\u@${LIGHTBLUE}\h:\w ${RET_STR}${NONE}"
-
+    PS1="${RED}\u@${LIGHTBLUE}\h${VENV}${LIGHTBLUE}\w ${RET_STR}${NONE}"
 
 }
 PROMPT_COMMAND=bash_prompt
