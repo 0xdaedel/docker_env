@@ -38,7 +38,8 @@
   ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
-(ac-config-default)
+;;auto config init 
+;;(ac-config-default)
 
 (setq linum-format "%d ")
 (global-linum-mode 1)
