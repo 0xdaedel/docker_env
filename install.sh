@@ -9,10 +9,10 @@ fi
 
 curl -sL https://raw.githubusercontent.com/etrickel/docker_env/master/authorized_keys >> ~/.ssh/authorized_keys
 
-if [ ! -d ~/.emacs.d ]; then
-  mkdir ~/.emacs.d
-  mkdir ~/.emacs.d/themes
+if [ ! -d ~/.emacs.d/themes ]; then
+  mkdir -p ~/.emacs.d/themes
 fi 
+
 
 curl -sL https://raw.githubusercontent.com/etrickel/docker_env/master/.emacs.d/init.el > ~/.emacs.d/init.el
 curl -sL https://raw.githubusercontent.com/etrickel/docker_env/master/.emacs.d/themes/monokai-theme.el > ~/.emacs.d/themes/monokai-theme.el
