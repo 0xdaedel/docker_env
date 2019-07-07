@@ -1,4 +1,4 @@
-!#/usr/bin/env bash
+#!/usr/bin/env bash
 
 curl -sL https://raw.githubusercontent.com/etrickel/docker_env/master/.bash_prompt -O ~/.bash_prompt
 curl -sL https://raw.githubusercontent.com/etrickel/docker_env/master/.bashrc > ~/.bashrc
