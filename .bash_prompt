@@ -1,33 +1,42 @@
-# .bashrc_tmp
-
-temp=$(tty) ; 
+temp=$(tty) ;
 TTY=${temp:9}
 
 bash_prompt() {
     local RET=$?        # set return value of last command MUST BE FIRST
-    # emphasized (bolded) colors
-    local RED="\[\033[0;31m\]"
-    local BOLDRED="\[\033[1;31m\]"
+    local USERCOLOR="\[\e[38;5;81m\]"
+    local DIRCOLOR="\[\e[1;34m\]"
+    local BOLDRED="\[\e[1;31m\]"
 
-    local GREEN="\[\033[1;32m\]"
-    local BLUEGREEN="\[\033[38;5;81m\]"
+    local val=$(hostname)
+    if ! [[ ${val} =~ ([a-fA-F0-9]\{${#val}\}) ]]; then 
+       local a=${val}
+       val=$(for ((i=0;i<${#a};i++));do printf %02X \'${a:$i:1};done)
+    fi 
 
-    local BLUE="\[\033[1;34m\]"
-    local LIGHTBLUE="\[\033[38;5;33m\]"
-    local MAGENTA="\[\033[1;35m\]"
+    # clean up numbers that'll display poorly
+    while [[ ${val:0:2} =~ (00.*|[1][0-5].*|e[7-f].*) ]]; do val=${val:2};done;
+    while [[ ${val:2:2} =~ (00.*|[1][0-5].*|e[7-f].*) ]]; do val=${val:0:2}${val:4};done;
+    
 
-    local NONE="\[\033[0m\]"    # unsets color to term's fg color
+
+    if [[ ${val:0:2} =~ [A-F0-9a-f][A-F0-9a-f].* ]]; then
+        USERCOLOR=$(printf '\[\e[38;5;%dm\]' 0x${val:0:2}) ;
+    fi
+    if [[ ${val:2:2} =~ [A-F0-9a-f][A-F0-9a-f].* ]]; then
+        DIRCOLOR=$(printf '\[\e[38;5;%dm\]' 0x${val:2:2}) ;
+    fi
+
+    local NONE="\[\e[0m\]"    # unsets color to term's fg color
 
     local VENV=""
     if [ ! -z ${VIRTUAL_ENV+x} ];
-        then local VENV=" ${BLUEGREEN}[$(basename $VIRTUAL_ENV)]${NONE} ";
+        then local VENV=" [$(basename $VIRTUAL_ENV)]";
     fi
-#    local TOPDIRS="$(basename $(dirname $PWD))/$(basename $PWD) "
-    local RET_STR="${GREEN}# "
+    local RET_STR="${NONE}# "
 
-    [ $RET -ne 0 ] && RET_STR="${BOLDRED}($RET) "
+    [ $RET -ne 0 ] && RET_STR="${BOLDRED}($RET)${NONE} "
 
-    PS1="${RED}\u@${LIGHTBLUE}\h${VENV}${LIGHTBLUE}\w ${RET_STR}${NONE}"
+    PS1="${USERCOLOR}\u@\h${VENV} ${DIRCOLOR}\w ${RET_STR}"
 
 }
 PROMPT_COMMAND=bash_prompt
