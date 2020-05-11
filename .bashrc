@@ -91,4 +91,5 @@ if [ -f ~/.extra_bash_cfg ]; then
 fi
 
 
+export LAST_IP=$(ifconfig |egrep -oh "inet 172.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}"|cut -d "." -f4) 
 

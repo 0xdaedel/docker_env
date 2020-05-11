@@ -35,8 +35,8 @@ bash_prompt() {
     local RET_STR="${NONE}# "
 
     [ $RET -ne 0 ] && RET_STR="${BOLDRED}($RET)${NONE} "
-
-    PS1="${USERCOLOR}\u@\h${VENV} ${DIRCOLOR}\w ${RET_STR}"
+    local showip="-${LAST_IP}"
+    PS1="${USERCOLOR}\u@\h${showip}${VENV} ${DIRCOLOR}\w ${RET_STR}"
 
 }
 PROMPT_COMMAND=bash_prompt
