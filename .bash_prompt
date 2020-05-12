@@ -8,10 +8,11 @@ bash_prompt() {
     local BOLDRED="\[\e[1;31m\]"
 
     local val=$(hostname)
-    if ! [[ ${val} =~ ([a-fA-F0-9]\{${#val}\}) ]]; then 
+    local val_regex="[a-fA-F0-9]{${#val}}"
+    if ! [[ ${val} =~ $val_regex ]]; then
        local a=${val}
        val=$(for ((i=0;i<${#a};i++));do printf %02X \'${a:$i:1};done)
-    fi 
+    fi
 
     # clean up numbers that'll display poorly
     while [[ ${val:0:2} =~ (00.*|[1][0-5].*|e[7-f].*) ]]; do val=${val:2};done;
