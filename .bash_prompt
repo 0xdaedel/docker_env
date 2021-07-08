@@ -7,7 +7,7 @@ bash_prompt() {
     local DIRCOLOR="\[\e[1;34m\]"
     local BOLDRED="\[\e[1;31m\]"
 
-    local val=$(hostname)
+    local val=$(hostname | md5sum -|head -c 10)
     local val_regex="[a-fA-F0-9]{${#val}}"
     if ! [[ ${val} =~ $val_regex ]]; then
        local a=${val}
